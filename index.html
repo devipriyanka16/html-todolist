@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        form{
+           padding-top: 20px;
+           padding-bottom: 20px;
+           text-align: center;
+           background-color: rgba(27, 103, 236, 0.763);
+           margin: 50px;
+
+        }
+        h1{
+           color:rgb(248, 255, 242);
+           text-align: center;
+           margin: 50px;
+           background-color: rgba(27, 103, 236, 0.76);
+        }
+        body {
+          
+            background-image: url('https://img.freepik.com/free-photo/flat-lay-notebook-with-list-desk_23-2148938724.jpg'), url('https://t4.ftcdn.net/jpg/03/61/01/89/360_F_361018944_HkcCYRsgv14bXoe8MEYxfQoZEG39rdry.jpg');
+            background-repeat: no-repeat;
+            background-position: left center, right center;
+            background-size: 50% 100%, 50% 100%;
+            position:relative;
+            background-size: cover;
+           
+            
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(211, 12, 12, 0.1), rgba(2, 145, 235, 0.388));
+            
+            
+        }  
+        
+        
+    </style>
+</head>
+<body>
+    
+    <h1>To-Do List</h1>
+    <form id="task-form">
+        <input type="text" id="task-input" placeholder="Enter task">
+        <button type="submit">Add Task</button>
+        
+    </form>
+    <ul id="task-list"></ul>
+    
+    
+    <script>
+        document.getElementById('task-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        const taskInput = document.getElementById('task-input');
+        const taskList = document.getElementById('task-list');
+    
+        if (taskInput.value.trim() === '') {
+            return;
+        }
+    
+        const taskListItem = document.createElement('li');
+        taskListItem.textContent = taskInput.value;
+    
+        const checkBox = document.createElement('input');
+        checkBox.type = 'checkbox';
+        checkBox.addEventListener('change', function() {
+            if (this.checked) {
+                taskListItem.style.textDecoration = 'line-through';
+            } else {
+                taskListItem.style.textDecoration = 'none';
+            }
+        });
+    
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', function() {
+            taskList.removeChild(taskListItem);
+        });
+    
+        taskListItem.appendChild(checkBox);
+        taskListItem.appendChild(deleteButton);
+        taskList.appendChild(taskListItem);
+    
+        taskInput.value = '';
+        });
+        
+    </script>
+</body>
+</html>
